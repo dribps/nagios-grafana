@@ -34,8 +34,8 @@ ENV IP_LOCH                 127.0.0.1
 ENV IP_SUB                  24
 # plantillas
 ENV TEMPLC                  templates/_correo
-ENV TEMPLN                  templates_nagios
-ENV TEMPLR                  templates_nrpe
+ENV TEMPLN                  templates/_nagios
+ENV TEMPLR                  templates/_nrpe
 ENV TEMPLG                  templates/_grafana
 # Establecer el timezone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
