@@ -19,7 +19,7 @@ ENV VERSION_NRDP            1.5.2
 ENV VERSION_NRPE            3.2.1
 ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
-ENV NAGIOS_USER             nagiosadmin
+ENV NAGIOS_USER             nagios
 ENV NAGIOS_PASS             nagios
 ENV NAGIOS_GROUP            nagcmd
 ENV NRDP_TOKEN              non775maguni0acc
