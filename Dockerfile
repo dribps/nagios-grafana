@@ -156,7 +156,7 @@ COPY ${TEMPLN}.status-header.j2 /usr/local/nagios/share/ssi/status-header.ssi
 # Descargar e instalar Grafana manualmente
 RUN wget https://dl.grafana.com/oss/release/grafana_${VERSION_GRAFANA}_amd64.deb -P /tmp && \
     dpkg -i /tmp/grafana_${VERSION_GRAFANA}_amd64.deb && \
-    rm /tmp/grafana-${VERSION_GRAFANA}.deb
+    rm /tmp/grafana-${VERSION_GRAFANA}_amd64.deb
 
 # Instalar plugin PNP4Nagios para Grafana
 RUN grafana-cli plugins install sni-pnp-datasource
