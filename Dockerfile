@@ -19,7 +19,7 @@ ENV VERSION_NRDP            1.5.2
 ENV VERSION_NRPE            4.0.3
 ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
-ENV NAGIOS_USER             nagios
+ENV NAGIOS_USER             nagiosadmin
 ENV NAGIOS_PASS             nagios
 ENV NAGIOS_GROUP            nagios
 ENV NRDP_TOKEN              non775maguni0acc
@@ -137,14 +137,14 @@ RUN a2enmod rewrite && \
 ####################################################################################### PNP4Nagios
 
 # Descargar y descomprimir PNP4Nagios
-RUN wget --no-check-certificate https://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz && \
+RUN wget  https://github.com/lingej/pnp4nagios/archive/${VERSION_PNP_NAGIOS}.tar.gz && \
     tar xzf pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/pnp4nagios-${VERSION_PNP_NAGIOS} && \
     ./configure && \
     make all && \
     make fullinstall
 
-# Eliminar archivo de instalación para seguridad
+    # Eliminar archivo de instalación para seguridad
 RUN rm -f /usr/local/pnp4nagios/share/install.php
 
 # Copiar plantillas de configuración para nagios.cfg, commands.cfg, templates.cfg y localhost.cfg
