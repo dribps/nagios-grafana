@@ -90,17 +90,16 @@ RUN apt-get update && \
         apt-get clean &&  rm -rf /var/lib/apt/lists/*
 
 ####################################################################################### Nagios
-# Crear usuario y grupo para Nagios
-RUN groupadd ${NAGIOS_GROUP} && \
-    useradd -m ${NAGIOS_USER} && \
-    usermod -aG ${NAGIOS_GROUP} ${NAGIOS_USER} && \
+# Crear el grupo y el usuario para Nagios
+RUN groupadd -g 1001 ${NAGIOS_GROUP} && \
+    useradd -u 1001 -m -g ${NAGIOS_GROUP} ${NAGIOS_USER} && \
     usermod -aG ${NAGIOS_GROUP} www-data
 
 RUN cd /tmp
 # Instalar Nagios Core
-RUN wget --no-check-certificate https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.5.6.tar.gz && \
-    tar xzf nagios-4.5.6.tar.gz -C /tmp && \
-    cd /tmp/nagios-4.5.6 && \
+RUN wget --no-check-certificate https://assets.nagios.com/downloads/nagioscore/releases/nagios-${VERSION_NAGIOS}.tar.gz && \
+    tar xzf nagios-${VERSION_NAGIOS}.tar.gz -C /tmp && \
+    cd /tmp/nagios-${VERSION_NAGIOS} && \
     ./configure --with-command-group=nagcmd && \
     make all && \
     make install && \
