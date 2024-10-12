@@ -190,7 +190,7 @@ RUN postmap /etc/postfix/sasl_passwd
 
 ####################################################################################### NRPE
 # Descargar y descomprimir NRPE ${VERSION_NRPE}.
-RUN https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${VERSION_NRPE}/nrpe-${VERSION_NRPE}.tar.gz && \
+RUN wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${VERSION_NRPE}/nrpe-${VERSION_NRPE}.tar.gz && \
     tar xzf nrpe-${VERSION_NRPE}.tar.gz  -C /tmp &&\
     cd /tmp/nrpe-${VERSION_NRPE} && \
     ./configure --enable-command-args && \
