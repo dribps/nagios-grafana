@@ -204,7 +204,7 @@ RUN wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${VERS
     make install-plugin && \
     make install-daemon && \
     make install-config && \
-    make install-init
+    make install-inetd
 
 # Eliminar archivo de instalación para seguridad
 RUN rm -rf /tmp/nrpe-${VERSION_NRPE}*
