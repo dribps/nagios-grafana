@@ -136,7 +136,7 @@ RUN a2enmod rewrite && \
 ####################################################################################### PNP4Nagios
 
 # Descargar y descomprimir PNP4Nagios
-RUN wget  https://github.com/lingej/pnp4nagios/archive/${VERSION_PNP_NAGIOS}.tar.gz && \
+RUN wget --no-check-certificate https://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz && \
     tar xzf pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/pnp4nagios-${VERSION_PNP_NAGIOS} && \
     ./configure && \
