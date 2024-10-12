@@ -62,6 +62,7 @@ RUN apt-get update && \
         # para NRPE
         openssl \
         xinetd \
+        libpq-dev \
         # para PNP4Nagios
         php-gd \
         rrdtool \
@@ -188,7 +189,7 @@ RUN chmod 600 /etc/postfix/sasl_passwd && \
 RUN postmap /etc/postfix/sasl_passwd
 
 ####################################################################################### NRPE
-# Descargar y descomprimir NRPE
+# Descargar y descomprimir NRPE ${VERSION_NRPE}.
 RUN wget https://github.com/NagiosEnterprises/nrpe/archive/nrpe-${VERSION_NRPE}.tar.gz && \
     tar xzf nrpe-${VERSION_NRPE}.tar.gz  -C /tmp &&\
     cd /tmp/nrpe-${VERSION_NRPE} && \
@@ -200,7 +201,7 @@ RUN wget https://github.com/NagiosEnterprises/nrpe/archive/nrpe-${VERSION_NRPE}.
     make install-init
 
 # Eliminar archivo de instalación para seguridad
-RUN rm -rf /tmp/nrpe-${VERSION_NRPE}* 
+RUN rm -rf /tmp/nrpe-${VERSION_NRPE}*
 
 # Añadir puerto NRPE al archivo de servicios
 RUN echo "nrpe    5666/tcp" >> /etc/services
