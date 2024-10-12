@@ -167,9 +167,6 @@ RUN wget https://github.com/lingej/pnp-metrics-api/raw/master/application/contro
 # Eliminar archivo de instalación para seguridad
 RUN rm -rf /tmp/grafana_${VERSION_GRAFANA}_amd64.deb
 
-# Habilitar y configurar servicios
-RUN service grafana-server start
-
 # Copiar la configuración de PNP4Nagios para Grafana
 COPY ${TEMPLG}.pnp4nagios.j2 /etc/apache2/conf-available/pnp4nagios.conf
 RUN a2enconf pnp4nagios && systemctl reload apache2
