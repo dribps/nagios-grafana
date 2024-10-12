@@ -19,7 +19,7 @@ ENV VERSION_NRDP            1.5.2
 ENV VERSION_NRPE            4.0.3
 ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
-ENV NAGIOS_USER             nagiosadmin
+ENV NAGIOS_USER             nagios
 ENV NAGIOS_PASS             nagios
 ENV NAGIOS_GROUP            nagios
 ENV NRDP_TOKEN              non775maguni0acc
@@ -127,7 +127,6 @@ RUN rm -rf /tmp/nagios-${VERSION_NAGIOS}* /tmp/nagios-plugins-${VERSION_NAGIOS_P
 
 # Configurar usuario de Nagios para la interfaz web
 RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users ${NAGIOS_USER} ${NAGIOS_PASS}
-RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
 
 # Configurar Nagios
 RUN a2enmod rewrite && \
