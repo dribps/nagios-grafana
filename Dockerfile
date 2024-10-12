@@ -36,7 +36,7 @@ ENV IP_SUB                  24
 ENV TEMPLC                  templates/_correo
 ENV TEMPLN                  templates_nagios
 ENV TEMPLR                  templates_nrpe
-ENV TEMPLG                  templates_grafana
+ENV TEMPLG                  templates/_grafana
 # Establecer el timezone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
