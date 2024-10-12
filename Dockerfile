@@ -33,7 +33,10 @@ ENV IP_LAN                  192.168.1.0
 ENV IP_LOCH                 127.0.0.1
 ENV IP_SUB                  24
 # plantillas
-ENV TEMPL                   templates
+ENV TEMPLC                  templates_correo
+ENV TEMPLN                  templates_nagios
+ENV TEMPLR                  templates_nrpe
+ENV TEMPLG                  templates_grafana
 # Establecer el timezone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -137,13 +140,13 @@ RUN wget --no-check-certificate https://downloads.sourceforge.net/project/pnp4na
 RUN rm -f /usr/local/pnp4nagios/share/install.php
 
 # Copiar plantillas de configuración para nagios.cfg, commands.cfg, templates.cfg y localhost.cfg
-COPY ${TEMPL}.nagios.j2 /usr/local/nagios/etc/nagios.cfg
-COPY ${TEMPL}.commands.j2 /usr/local/nagios/etc/objects/commands.cfg
-COPY ${TEMPL}.templates.j2 /usr/local/nagios/etc/objects/templates.cfg
-COPY ${TEMPL}.localhost.j2 /usr/local/nagios/etc/objects/localhost.cfg
+COPY ${TEMPLN}.nagios.j2 /usr/local/nagios/etc/nagios.cfg
+COPY ${TEMPLN}.commands.j2 /usr/local/nagios/etc/objects/commands.cfg
+COPY ${TEMPLN}.templates.j2 /usr/local/nagios/etc/objects/templates.cfg
+COPY ${TEMPLN}.localhost.j2 /usr/local/nagios/etc/objects/localhost.cfg
 
 # Configurar la vista previa de los gráficos en Nagios
-COPY ${TEMPL}.status-header.j2 /usr/local/nagios/share/ssi/status-header.ssi
+COPY ${TEMPLN}.status-header.j2 /usr/local/nagios/share/ssi/status-header.ssi
 
 # Procesar la plantilla (suponiendo que tienes jinja2-cli instalado)
 # RUN jinja2 /usr/local/nagios/etc/templates/PNP4NAGIOS.nagios.j2 > /usr/local/nagios/etc/nagios.cfg
@@ -167,14 +170,14 @@ RUN rm -rf /tmp/grafana_${VERSION_GRAFANA}_amd64.deb
 RUN service grafana-server start
 
 # Copiar la configuración de PNP4Nagios para Grafana
-COPY ${TEMPL}.pnp4nagios.j2 /etc/apache2/conf-available/pnp4nagios.conf
+COPY ${TEMPLG}.pnp4nagios.j2 /etc/apache2/conf-available/pnp4nagios.conf
 RUN a2enconf pnp4nagios && systemctl reload apache2
 
 ####################################################################################### CORREO
 
 # Copiar los archivos de configuración para Postfix
-COPY ${TEMPL}.postfix1.j2 /etc/postfix/sasl_passwd
-COPY ${TEMPL}.postfix2.j2 /etc/postfix/main.cf
+COPY ${TEMPLC}.postfix1.j2 /etc/postfix/sasl_passwd
+COPY ${TEMPLC}.postfix2.j2 /etc/postfix/main.cf
 
 # Establecer permisos en los archivos de configuración
 RUN chmod 600 /etc/postfix/sasl_passwd && \
