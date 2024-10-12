@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  nag-graf:
+    image: nagios-grafana:latest
+    user: root
+    ports:
+      - "1080:80"
+      - "1025:25"
+      - "3000:3000"
+      - "5666:5666"
+      - "12489:12489"
+    volumes:
+      - ./data/nagios:/usr/local/nagios/etc
+      - ./data/grafana:/var/lib/grafana
+    restart: unless-stopped
+    networks:
+      - default
