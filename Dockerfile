@@ -63,6 +63,7 @@ RUN apt-get update && \
         openssl \
         xinetd \
         libpq-dev \
+        libpam0g-dev \
         # para PNP4Nagios
         php-gd \
         rrdtool \
