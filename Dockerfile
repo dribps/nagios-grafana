@@ -16,7 +16,7 @@ ENV VERSION_GRAPHITE        1.1.3
 ENV VERSION_GRAFANA         11.2.2
 ENV VERSION_NCPA            2.1.3
 ENV VERSION_NRDP            1.5.2
-ENV VERSION_NRPE            3.2.1
+ENV VERSION_NRPE            4.0.3
 ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
 ENV NAGIOS_USER             nagios
@@ -64,6 +64,8 @@ RUN apt-get update && \
         xinetd \
         libpq-dev \
         libpam0g-dev \
+        libc6 \
+        autoconf \
         # para PNP4Nagios
         php-gd \
         rrdtool \
@@ -191,14 +193,16 @@ RUN postmap /etc/postfix/sasl_passwd
 
 ####################################################################################### NRPE
 # Descargar y descomprimir NRPE ${VERSION_NRPE}.
+RUN cd /tmp
 RUN wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${VERSION_NRPE}/nrpe-${VERSION_NRPE}.tar.gz && \
     tar xzf nrpe-${VERSION_NRPE}.tar.gz  -C /tmp &&\
     cd /tmp/nrpe-${VERSION_NRPE} && \
-    ./configure --enable-command-args --with-ssl-lib=/usr/lib/ssl --with-ssl-inc=/usr/include/ssl --with-nagios-user=${NAGIOS_USER} --with-nagios-group=${NAGIOS_GROUP} && \
+    ./configure --disable-ssl --with-nagios-user=${NAGIOS_USER} --with-nagios-group=${NAGIOS_GROUP} && \
     make all && \
     make install-groups-users && \
     make install && \
-    make install-plugin \
+    make install-plugin && \
+    make install-daemon && \
     make install-config && \
     make install-init
 
