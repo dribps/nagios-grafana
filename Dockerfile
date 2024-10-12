@@ -21,7 +21,7 @@ ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
 ENV NAGIOS_USER             nagios
 ENV NAGIOS_PASS             nagios
-ENV NAGIOS_GROUP            nagcmd
+ENV NAGIOS_GROUP            nagios
 ENV NRDP_TOKEN              non775maguni0acc
 ENV NCPA_TOKEN              fgr24bp10es06sdendd
 ENV MYSQL_USER              nagios
@@ -100,7 +100,7 @@ RUN cd /tmp
 RUN wget --no-check-certificate https://assets.nagios.com/downloads/nagioscore/releases/nagios-${VERSION_NAGIOS}.tar.gz && \
     tar xzf nagios-${VERSION_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/nagios-${VERSION_NAGIOS} && \
-    ./configure --with-command-group=nagcmd && \
+    ./configure --with-command-group=${NAGIOS_GROUP} && \
     make all && \
     make install && \
     make install-init && \
