@@ -74,6 +74,7 @@ RUN apt-get update && \
         software-properties-common \
         apt-transport-https \
         libfontconfig1 \
+        musl \
         # para Correo
         postfix \
         mailutils \
