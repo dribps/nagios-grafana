@@ -16,7 +16,7 @@ ENV VERSION_GRAPHITE        1.1.3
 ENV VERSION_GRAFANA         11.2.2
 ENV VERSION_NCPA            2.1.3
 ENV VERSION_NRDP            1.5.2
-ENV VERSION_NRPE            3.2.1
+ENV VERSION_NRPE            4.0.2
 ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
 ENV NAGIOS_USER             nagios
@@ -190,7 +190,7 @@ RUN postmap /etc/postfix/sasl_passwd
 
 ####################################################################################### NRPE
 # Descargar y descomprimir NRPE ${VERSION_NRPE}.
-RUN wget https://github.com/NagiosEnterprises/nrpe/archive/nrpe-${VERSION_NRPE}.tar.gz && \
+RUN https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${VERSION_NRPE}/nrpe-${VERSION_NRPE}.tar.gz && \
     tar xzf nrpe-${VERSION_NRPE}.tar.gz  -C /tmp &&\
     cd /tmp/nrpe-${VERSION_NRPE} && \
     ./configure --enable-command-args && \
