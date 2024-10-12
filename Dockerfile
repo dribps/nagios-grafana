@@ -180,7 +180,7 @@ RUN postmap /etc/postfix/sasl_passwd
 # Descargar y descomprimir NRPE
 RUN wget https://github.com/NagiosEnterprises/nrpe/archive/nrpe-${VERSION_NRPE}.tar.gz && \
     tar xzf nrpe-${VERSION_NRPE}.tar.gz  -C /tmp &&\
-    cd /tmp/nrpe-nrpe-${VERSION_NRPE} && \
+    cd /tmp/nrpe-${VERSION_NRPE} && \
     ./configure --enable-command-args && \
     make all && \
     make install-groups-users && \
