@@ -90,6 +90,7 @@ RUN apt-get update && \
         unzip \
         git \
         supervisor \
+        apache2-utils\
         # 
         && \
         apt-get clean &&  rm -rf /var/lib/apt/lists/*
@@ -126,6 +127,8 @@ RUN rm -rf /tmp/nagios-${VERSION_NAGIOS}* /tmp/nagios-plugins-${VERSION_NAGIOS_P
 
 # Configurar usuario de Nagios para la interfaz web
 RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users ${NAGIOS_USER} ${NAGIOS_PASS}
+RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
+
 # Configurar Nagios
 RUN a2enmod rewrite && \
     a2enmod cgi && \
