@@ -169,7 +169,9 @@ RUN rm -rf /tmp/grafana_${VERSION_GRAFANA}_amd64.deb
 
 # Copiar la configuración de PNP4Nagios para Grafana
 COPY ${TEMPLG}.pnp4nagios.j2 /etc/apache2/conf-available/pnp4nagios.conf
-RUN a2enconf pnp4nagios && systemctl reload apache2
+# Habilitar la configuración de PNP4Nagios y recargar Apache
+RUN a2enconf pnp4nagios && \
+    apache2ctl -k restart
 
 ####################################################################################### CORREO
 
