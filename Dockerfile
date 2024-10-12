@@ -96,6 +96,7 @@ RUN groupadd ${NAGIOS_GROUP} && \
     usermod -aG ${NAGIOS_GROUP} ${NAGIOS_USER} && \
     usermod -aG ${NAGIOS_GROUP} www-data
 
+run cd /tmp
 # Instalar Nagios Core
 RUN wget --no-check-certificate https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.5.6.tar.gz && \
     tar xzf nagios-4.5.6.tar.gz -C /tmp && \
