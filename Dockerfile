@@ -33,7 +33,7 @@ ENV IP_LAN                  192.168.1.0
 ENV IP_LOCH                 127.0.0.1
 ENV IP_SUB                  24
 # plantillas
-ENV TEMPLC                  templates_correo
+ENV TEMPLC                  templates/_correo
 ENV TEMPLN                  templates_nagios
 ENV TEMPLR                  templates_nrpe
 ENV TEMPLG                  templates_grafana
