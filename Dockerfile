@@ -194,10 +194,11 @@ RUN postmap /etc/postfix/sasl_passwd
 RUN wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${VERSION_NRPE}/nrpe-${VERSION_NRPE}.tar.gz && \
     tar xzf nrpe-${VERSION_NRPE}.tar.gz  -C /tmp &&\
     cd /tmp/nrpe-${VERSION_NRPE} && \
-    ./configure --enable-command-args && \
+    ./configure --enable-command-args --with-ssl-lib=/usr/lib/ssl --with-ssl-inc=/usr/include/ssl --with-nagios-user=${NAGIOS_USER} --with-nagios-group=${NAGIOS_GROUP} && \
     make all && \
     make install-groups-users && \
     make install && \
+    make install-plugin \
     make install-config && \
     make install-init
 
