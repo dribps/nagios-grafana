@@ -1,0 +1,27 @@
+RUN apt-get install -y firewalld && \
+    systemctl start firewalld && \
+    firewall-cmd --zone=public --add-port=3000/tcp --permanent && \
+    firewall-cmd --reload
+
+# Habilitar el puerto 3000 en el firewall
+RUN systemctl start firewalld && \
+    firewall-cmd --zone=public --add-port=3000/tcp --permanent && \
+    firewall-cmd --reload
+
+
+
+El contenedor de Ubuntu puede no tener systemd habilitado, 
+lo que puede causar fallos en el inicio de servicios como firewalld o grafana-server. 
+Podrías usar comandos service para asegurar que los servicios 
+inicien en entornos donde no está disponible systemctl.
+
+# Iniciar los servicios de forma alternativa en sistemas sin systemd
+CMD service apache2 start && \
+    service npcd start && \
+    service nagios start && \
+    service nrpe start && \
+    service postfix start && \
+    service grafana-server start && \
+    tail -f /dev/nul
+
+
