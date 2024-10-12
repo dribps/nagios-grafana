@@ -101,7 +101,7 @@ RUN cd /tmp
 RUN wget --no-check-certificate https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.5.6.tar.gz && \
     tar xzf nagios-4.5.6.tar.gz -C /tmp && \
     cd /tmp/nagios-4.5.6 && \
-    ./configure --with-command-group=${NAGIOS_GROUP} && \
+    ./configure --with-command-group=nagcmd && \
     make all && \
     make install && \
     make install-init && \
