@@ -110,7 +110,13 @@ RUN cd /tmp
 RUN wget --no-check-certificate https://assets.nagios.com/downloads/nagioscore/releases/nagios-${VERSION_NAGIOS}.tar.gz && \
     tar xzf nagios-${VERSION_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/nagios-${VERSION_NAGIOS} && \
-    ./configure --with-command-group=${NAGIOS_GROUP} && \
+    ./configure \
+    --prefix=${NAGIOS_HOME} \
+    --enable-event-broker \
+    --with-command-group=${NAGIOS_GROUP} \
+    --with-nagios-user=${NAGIOS_USER} \
+    --with-nagios-group=${NAGIOS_GROUP} && \
+
     make all && \
     make install && \
     make install-init && \
