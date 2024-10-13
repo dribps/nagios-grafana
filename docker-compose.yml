@@ -18,4 +18,4 @@ services:
 #git clone https://github.com/dribps/sc.git
 
 #cd sc
-#sudo docker build --tag nagios-grafana
+#sudo docker build --tag nagios-grafana .
