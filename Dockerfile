@@ -145,13 +145,16 @@ RUN a2enmod rewrite && \
 
 ####################################################################################### PNP4Nagios
 
+RUN groupadd -r nagios && useradd -r -g nagios nagios
+
 # Descargar y descomprimir PNP4Nagios
 #RUN wget -q -O https://github.com/lingej/pnp4nagios/archive/${VERSION_PNP_NAGIOS}.tar.gz && \
 #RUN wget -q -O https://github.com/dribps/repos/raw/refs/heads/main/pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz  && \
 RUN wget --no-check-certificate https://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz && \
     tar xzf pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/pnp4nagios-${VERSION_PNP_NAGIOS} && \
-    ./configure --with-httpd-conf=/etc/apache2/sites-enabled && \
+#   ./configure --with-httpd-conf=/etc/apache2/sites-enabled && \
+    ./configure && \
     make all && \
     make install && \
     make install-webconf && \
