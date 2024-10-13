@@ -24,6 +24,7 @@ ENV NAGIOS_USER             nagiosadmin
 ENV NAGIOS_WWWUSER          www-data
 ENV NAGIOS_PASS             nagios
 ENV NAGIOS_GROUP            nagios
+ENV NAGIOS_CMDGROUP         nagios
 ENV NRDP_TOKEN              non775maguni0acc
 ENV NCPA_TOKEN              fgr24bp10es06sdendd
 ENV MYSQL_USER              nagios
@@ -99,11 +100,10 @@ RUN apt-get update && \
 
 ####################################################################################### Nagios
 # Crear el grupo y el usuario para Nagios
-RUN set -eux; \
-    ( id -u $NAGIOS_USER || useradd --system -d $NAGIOS_HOME $NAGIOS_USER ); \
-    ( egrep -i "^${NAGIOS_GROUP}" /etc/group || groupadd $NAGIOS_GROUP ); \
-    usermod -a -G $NAGIOS_GROUP $NAGIOS_USER; \
-    usermod -a -G $NAGIOS_GROUP www-data
+RUN ( egrep -i "^${NAGIOS_GROUP}"    /etc/group || groupadd $NAGIOS_GROUP    )                         && \
+    ( egrep -i "^${NAGIOS_CMDGROUP}" /etc/group || groupadd $NAGIOS_CMDGROUP )
+RUN ( id -u $NAGIOS_USER    || useradd --system -d $NAGIOS_HOME -g $NAGIOS_GROUP    $NAGIOS_USER    )  && \
+    ( id -u $NAGIOS_WWWUSER || useradd --system -d $NAGIOS_HOME -g $NAGIOS_CMDGROUP $NAGIOS_WWWUSER )
 
 RUN cd /tmp
 # Instalar Nagios Core
