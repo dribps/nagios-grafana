@@ -25,3 +25,6 @@ CMD service apache2 start && \
     tail -f /dev/nul
 
 
+#git clone https://github.com/dribps/sc.git
+
+#sudo docker build --tag nagios-grafana
