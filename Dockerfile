@@ -149,9 +149,13 @@ RUN a2enmod rewrite && \
 RUN wget --no-check-certificate https://github.com/lingej/pnp4nagios/archive/${VERSION_PNP_NAGIOS}.tar.gz && \
     tar xzf pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/pnp4nagios-${VERSION_PNP_NAGIOS} && \
-    ./configure && \
+    ./configure --with-httpd-conf=/etc/apache2/sites-enabled && \
     make all && \
-    make fullinstall
+    make install && \
+    make install-webconf && \
+    make install-config && \
+    make install-init
+
 
     # Eliminar archivo de instalación para seguridad
 RUN rm -f /usr/local/pnp4nagios/share/install.php
