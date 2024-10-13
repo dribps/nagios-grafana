@@ -145,8 +145,9 @@ RUN a2enmod rewrite && \
 
 ####################################################################################### PNP4Nagios
 
-# Descargar y descomprimir PNP4Nagios https://github.com/dribps/repos/raw/refs/heads/main/pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz
-RUN wget -q -O https://github.com/lingej/pnp4nagios/archive/${VERSION_PNP_NAGIOS}.tar.gz && \
+# Descargar y descomprimir PNP4Nagios
+#RUN wget -q -O https://github.com/lingej/pnp4nagios/archive/${VERSION_PNP_NAGIOS}.tar.gz && \
+RUN wget -q -O https://github.com/dribps/repos/raw/refs/heads/main/pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz  && \
     tar xzf pnp4nagios-${VERSION_PNP_NAGIOS}.tar.gz -C /tmp && \
     cd /tmp/pnp4nagios-${VERSION_PNP_NAGIOS} && \
     ./configure --with-httpd-conf=/etc/apache2/sites-enabled && \
