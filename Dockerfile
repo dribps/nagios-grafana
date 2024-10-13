@@ -136,7 +136,7 @@ RUN wget https://nagios-plugins.org/download/nagios-plugins-${VERSION_NAGIOS_PLU
 RUN rm -rf /tmp/nagios-${VERSION_NAGIOS}* /tmp/nagios-plugins-${VERSION_NAGIOS_PLUGINS}* 
 
 # Configurar usuario de Nagios para la interfaz web
-RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users ${NAGIOS_USER} ${NAGIOS_PASS}
+#RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users ${NAGIOS_USER} ${NAGIOS_PASS}
 
 # Configurar Nagios
 RUN a2enmod rewrite && \
