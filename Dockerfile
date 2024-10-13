@@ -19,7 +19,7 @@ ENV VERSION_NRDP            1.5.2
 ENV VERSION_NRPE            4.0.3
 ENV VERSION_PNP_NAGIOS      0.6.26
 #Asignacion de Variables - Cuentas
-ENV NAGIOS_USER             nagios
+ENV NAGIOS_USER             nagiosadmin
 ENV NAGIOS_PASS             nagios
 ENV NAGIOS_GROUP            nagios
 ENV NRDP_TOKEN              non775maguni0acc
@@ -97,8 +97,8 @@ RUN apt-get update && \
 
 ####################################################################################### Nagios
 # Crear el grupo y el usuario para Nagios
-RUN groupadd -g 1001 ${NAGIOS_GROUP} && \
-    useradd -u 1001 -m -g ${NAGIOS_GROUP} ${NAGIOS_USER} && \
+RUN groupadd -g ${NAGIOS_GROUP} && \
+    useradd -u -m -g ${NAGIOS_GROUP} ${NAGIOS_USER} && \
     usermod -aG ${NAGIOS_GROUP} www-data
 
 RUN cd /tmp
