@@ -2,7 +2,7 @@
 FROM ubuntu:24.04
 
 # Establece las variables de entorno necesarias
-#Desactivar preguntas interactivas
+#Desactivar preguntas interactivas 
 ENV DEBIAN_FRONTEND=noninteractive
 
 #Asignacion de Variables - hora
